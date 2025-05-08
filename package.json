@@ -1,7 +1,7 @@
 {
-  "name": "barcode-api-node",
+  "name": "barcode-api",
   "version": "1.0.0",
-  "description": "Simple Barcode Generator API using Node.js and bwip-js",
+  "description": "Barcode Generator API with Web Interface",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"

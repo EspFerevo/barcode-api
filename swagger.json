@@ -3,7 +3,7 @@
   "info": {
     "title": "Barcode Generator API",
     "version": "1.0.0",
-    "description": "API для генерации штрих-кодов (Code128, EAN13, и др.)"
+    "description": "API для генерации штрих-кодов"
   },
   "host": "localhost:3000",
   "basePath": "/",
@@ -31,7 +31,7 @@
         "produces": ["image/png"],
         "responses": {
           "200": {
-            "description": "Изображение штрих-кода"
+            "description": "Штрих-код сгенерирован"
           },
           "400": {
             "description": "Ошибка генерации"

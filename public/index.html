@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Генератор Штрих-кодов</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 30px;
+      max-width: 600px;
+      margin: auto;
+    }
+    input, select, button {
+      display: block;
+      width: 100%;
+      margin: 15px 0;
+      padding: 10px;
+      font-size: 1rem;
+    }
+    img {
+      margin-top: 20px;
+      max-width: 100%;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Генератор Штрих-кодов</h2>
+
+  <label for="data">Введите данные:</label>
+  <input type="text" id="data" value="123456789012" />
+
+  <label for="type">Тип штрих-кода:</label>
+  <select id="type">
+    <option value="code128">Code128</option>
+    <option value="ean13">EAN13</option>
+    <option value="upca">UPC-A</option>
+    <option value="code39">Code39</option>
+    <option value="isbn">ISBN</option>
+  </select>
+
+  <button onclick="generateBarcode()">Сгенерировать</button>
+
+  <img id="barcodeImage" src="" alt="Тут будет штрих-код" />
+
+  <script>
+    async function generateBarcode() {
+      const data = document.getElementById('data').value;
+      const type = document.getElementById('type').value;
+
+      const url = `/generate-barcode?data=${encodeURIComponent(data)}&type=${encodeURIComponent(type)}`;
+
+      try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Ошибка генерации");
+
+        const blob = await response.blob();
+        const imgUrl = URL.createObjectURL(blob);
+        document.getElementById('barcodeImage').src = imgUrl;
+      } catch (err) {
+        alert('Ошибка: ' + err.message);
+      }
+    }
+  </script>
+</body>
+</html>
