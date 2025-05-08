@@ -17,20 +17,22 @@ app.get('/generate-barcode', async (req, res) => {
   const { data = '123456789012', type = 'code128' } = req.query;
 
   try {
-    const png = await bwipjs.toBuffer({
+    const svg = await bwipjs.toBuffer({
       bcid: type,
       text: data,
       scale: 3,
       height: 10,
-      includetext: true
+      includetext: true,
+      output: 'svg' // <-- ВОТ ЭТО КЛЮЧЕВОЕ
     });
 
-    res.set('Content-Type', 'image/png');
-    res.send(png);
+    res.set('Content-Type', 'image/svg+xml');
+    res.send(svg);
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 });
+
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/public/index.html');
