@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Генератор Штрих-кодов</title>
   <style>
     body {
@@ -49,8 +49,8 @@
 
   <script>
     async function generateBarcode() {
-      const data = document.getElementById('data').value;
-      const type = document.getElementById('type').value;
+      const data = document.getElementById("data").value;
+      const type = document.getElementById("type").value;
 
       const url = `/generate-barcode?data=${encodeURIComponent(data)}&type=${encodeURIComponent(type)}`;
 
@@ -60,10 +60,15 @@
 
         const svgText = await response.text(); // Получаем SVG как текст
 
-        // Отображаем SVG прямо в контейнере
-        document.getElementById('barcodeImage').innerHTML = svgText;
+        // Преобразуем SVG в изображение
+        const imgElement = document.createElement("img");
+        imgElement.src = "data:image/svg+xml;base64," + btoa(svgText);
+
+        // Очистим контейнер и добавим новый img элемент
+        document.getElementById("barcodeImage").innerHTML = "";
+        document.getElementById("barcodeImage").appendChild(imgElement);
       } catch (err) {
-        alert('Ошибка: ' + err.message);
+        alert("Ошибка: " + err.message);
       }
     }
   </script>
