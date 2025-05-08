@@ -24,6 +24,7 @@
         width: 100%;
         border: 1px solid #ccc;
         padding: 10px;
+        min-height: 100px; /* Чтобы контейнер не сжимался до нуля */
       }
     </style>
   </head>
@@ -65,17 +66,8 @@
 
           const svgText = await response.text(); // Получаем SVG как текст
 
-          // Преобразуем SVG в base64
-          const encodedSvg = encodeURIComponent(svgText);  // Преобразуем SVG в строку, безопасную для URI
-          const base64Svg = btoa(unescape(encodedSvg));     // Преобразуем строку в base64
-
-          // Создаем элемент img и вставляем его в контейнер
-          const imgElement = document.createElement("img");
-          imgElement.src = `data:image/svg+xml;base64,${base64Svg}`;
-
-          // Очистим контейнер и добавим новый img элемент
-          document.getElementById("barcodeImage").innerHTML = "";
-          document.getElementById("barcodeImage").appendChild(imgElement);
+          // Вставляем SVG прямо в контейнер
+          document.getElementById("barcodeImage").innerHTML = svgText;
         } catch (err) {
           alert("Ошибка: " + err.message);
         }
