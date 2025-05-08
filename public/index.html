@@ -17,9 +17,9 @@
       padding: 10px;
       font-size: 1rem;
     }
-    img {
+    #barcodeImage {
       margin-top: 20px;
-      max-width: 100%;
+      width: 100%;
       border: 1px solid #ccc;
       padding: 10px;
     }
@@ -42,7 +42,10 @@
 
   <button onclick="generateBarcode()">Сгенерировать</button>
 
-  <img id="barcodeImage" src="" alt="Тут будет штрих-код" />
+  <div>
+    <h3>Ваш Штрих-код:</h3>
+    <div id="barcodeImage"></div> <!-- Здесь будет отображаться SVG -->
+  </div>
 
   <script>
     async function generateBarcode() {
@@ -55,9 +58,10 @@
         const response = await fetch(url);
         if (!response.ok) throw new Error("Ошибка генерации");
 
-        const blob = await response.blob();
-        const imgUrl = URL.createObjectURL(blob);
-        document.getElementById('barcodeImage').src = imgUrl;
+        const svgText = await response.text(); // Получаем SVG как текст
+
+        // Отображаем SVG прямо в контейнере
+        document.getElementById('barcodeImage').innerHTML = svgText;
       } catch (err) {
         alert('Ошибка: ' + err.message);
       }
