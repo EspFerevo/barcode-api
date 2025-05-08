@@ -1,0 +1,14 @@
+{
+  "name": "barcode-api-node",
+  "version": "1.0.0",
+  "description": "Simple Barcode Generator API using Node.js and bwip-js",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "bwip-js": "^2.1.2",
+    "express": "^4.18.2",
+    "swagger-ui-express": "^4.6.3"
+  }
+}

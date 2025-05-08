@@ -1,0 +1,43 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Barcode Generator API",
+    "version": "1.0.0",
+    "description": "API для генерации штрих-кодов (Code128, EAN13, и др.)"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": ["http"],
+  "paths": {
+    "/generate-barcode": {
+      "get": {
+        "summary": "Генерация штрих-кода",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "code128",
+            "enum": ["code128", "ean13", "upca", "code39", "isbn"]
+          }
+        ],
+        "produces": ["image/png"],
+        "responses": {
+          "200": {
+            "description": "Изображение штрих-кода"
+          },
+          "400": {
+            "description": "Ошибка генерации"
+          }
+        }
+      }
+    }
+  }
+}
