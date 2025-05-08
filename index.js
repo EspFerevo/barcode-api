@@ -26,6 +26,8 @@ app.get("/generate-barcode", async (req, res) => {
       output: "svg", // Важно: генерируем SVG
     });
 
+    console.log(svg.toString());
+
     res.set("Content-Type", "image/svg+xml");
 
     res.set("Content-Type", "image/svg+xml");
