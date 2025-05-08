@@ -27,13 +27,15 @@ app.get("/generate-barcode", async (req, res) => {
     });
 
     res.set("Content-Type", "image/svg+xml");
+
+    res.set("Content-Type", "image/svg+xml");
     res.send(svg);
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 });
 
-app.get("/", (req, res) => {
+app.get("/", (_req, res) => {
   res.sendFile(__dirname + "/public/index.html");
 });
 
