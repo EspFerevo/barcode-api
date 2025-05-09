@@ -48,7 +48,6 @@
     <div>
       <h3>Ваш Штрих-код:</h3>
       <div id="barcodeImage"></div>
-      <!-- Здесь будет отображаться SVG -->
     </div>
 
     <script>
@@ -64,10 +63,9 @@
           const response = await fetch(url);
           if (!response.ok) throw new Error("Ошибка генерации");
 
-          const svgText = await response.text(); // Получаем SVG как текст
+          const pngText = await response.text();
 
-          // Вставляем SVG прямо в контейнер
-          document.getElementById("barcodeImage").innerHTML = svgText;
+          document.getElementById("barcodeImage").innerHTML = pngText;
         } catch (err) {
           alert("Ошибка: " + err.message);
         }
