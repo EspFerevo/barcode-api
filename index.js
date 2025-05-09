@@ -16,6 +16,8 @@ app.use(express.static("public"));
 app.get("/generate-barcode", async (req, res) => {
   const { data = "123456789012", type = "code128" } = req.query;
 
+//! Png -->
+
   try {
     const png = await bwipjs.toBuffer({
       bcid: type,
